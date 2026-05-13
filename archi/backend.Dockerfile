@@ -2,12 +2,15 @@ FROM eclipse-temurin:21-jdk AS builder
 WORKDIR /app
 COPY gradle gradle
 COPY gradlew .
-COPY build.gradle.kts settings.gradle.kts .
+COPY gradle.properties .
+COPY build.gradle.kts settings.gradle.kts ./
 RUN ./gradlew dependencies --no-daemon
 COPY src src
-RUN ./gradlew bootJar --no-daemon
+RUN ./gradlew buildFatJar --no-daemon
 
 FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+EXPOSE 8080
+COPY --from=builder /app/build/libs/*-all.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

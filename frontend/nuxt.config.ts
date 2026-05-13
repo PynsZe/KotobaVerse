@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const BACKEND_URL = process.env.BACKEND_URL ?? 'http://backend:5000'
+const BACKEND_URL = process.env.BACKEND_URL ?? 'http://backend:8080'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
