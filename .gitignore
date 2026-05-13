@@ -1,0 +1,68 @@
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nuxt-local
+.nitro
+.cache
+frontend/.output/
+frontend/.data/
+frontend/.nuxt/
+frontend/.nuxt-local/
+frontend/.nitro/
+frontend/.cache/
+dist/
+frontend/dist/
+
+# Node dependencies
+node_modules/
+frontend/node_modules/
+
+# Logs
+logs
+*.log
+
+# Misc
+.fleet
+HELP.md
+.gradle
+build/
+backend/kotobaverse/.gradle/
+backend/kotobaverse/build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### VS Code ###
+.vscode/
+
+### Kotlin ###
+.kotlin
+
+coverage/
+*.tmp
+.DS_Store
+build/
+.env*
+!.env.example

@@ -1,0 +1,12 @@
+ktor:
+  deployment:
+    port: 8080
+  application:
+    modules:
+      - io.github.pynsze.HttpKt.configureHttp
+      - io.github.pynsze.MonitoringKt.configureMonitoring
+      - io.github.pynsze.SerializationKt.configureSerialization
+      - io.github.pynsze.SecurityKt.configureSecurity
+      - io.github.pynsze.RequestValidationKt.configureRequestValidation
+      - io.github.pynsze.StatusPagesKt.configureStatusPages
+      - io.github.pynsze.RoutingKt.configureRouting

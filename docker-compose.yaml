@@ -1,0 +1,50 @@
+services:
+  postgres:
+    build: ./dockers/postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - db-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../dockers/backend/Dockerfile
+    restart: unless-stopped
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - db-net
+      - app-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../dockers/frontend/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    networks:
+      - app-net
+
+networks:
+  db-net:
+    internal: true
+  app-net:
+
+volumes:
+  postgres-data:
