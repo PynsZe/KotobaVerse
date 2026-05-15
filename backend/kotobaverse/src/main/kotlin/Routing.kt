@@ -7,8 +7,12 @@ import io.ktor.server.routing.*
 
 fun Application.configureRouting() {
     routing {
-        get("/health") {
-            call.respond(HttpStatusCode.OK, mapOf("status" to "ok"))
+        route("/api/v0") {
+            get("/health") {
+                call.respond(HttpStatusCode.OK, mapOf("status" to "ok"))
+            }
+            authRoutes()
+            usersRoutes()
         }
     }
 }

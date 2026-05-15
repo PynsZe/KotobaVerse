@@ -1,7 +1,8 @@
 CREATE TABLE users (
     id              BIGSERIAL   PRIMARY KEY,
     email           TEXT        NOT NULL UNIQUE CHECK (email = lower(email)),
-    display_name    TEXT        NOT NULL,
+    username        VARCH(255)  NOT NULL UNIQUE,
+    display_name    TEXT,
     oauth_provider  TEXT        NOT NULL,
     oauth_subject   TEXT        NOT NULL,
     avatar_url      TEXT,
