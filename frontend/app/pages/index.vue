@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const {data: status, error} = useLazyFetch('/api/health')
+const {data: status, error} = useLazyFetch('/health')
 </script>
 
 <template>

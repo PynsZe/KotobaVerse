@@ -1,6 +1,8 @@
 services:
   postgres:
-    build: ./dockers/postgres
+    build:
+      context: ./archi
+      dockerfile: postgresql.Dockerfile
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -17,8 +19,8 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: ../dockers/backend/Dockerfile
+      context: ./backend/kotobaverse
+      dockerfile: ../../archi/backend.Dockerfile
     restart: unless-stopped
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
@@ -30,14 +32,21 @@ services:
     networks:
       - db-net
       - app-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/health || exit 1"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: ../dockers/frontend/Dockerfile
+      dockerfile: ../archi/frontend.Dockerfile
     restart: unless-stopped
     ports:
       - "3000:3000"
+    depends_on:
+      - backend
     networks:
       - app-net
 
