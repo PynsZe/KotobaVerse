@@ -58,6 +58,9 @@ dependencies {
     // Tokenisation japonaise (v1.0-alpha serveur, migrera côté client en v1.0-beta)
     implementation(libs.kuromoji.ipadic)
 
+    // Shared
+    implementation(projects.shared)
+
     // Tests
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit5)

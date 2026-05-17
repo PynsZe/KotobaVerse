@@ -29,6 +29,8 @@ kotlin {
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.compose.runtime)
+            implementation(projects.shared)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)

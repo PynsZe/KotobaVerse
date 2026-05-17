@@ -22,6 +22,8 @@ kuromoji = "0.9.0"
 logback = "1.5.21"
 material3 = "1.11.0-alpha07"
 postgresql = "42.7.11"
+kotlinx-serialization = "1.8.0"
+kotlinx-datetime = "0.6.2"
 
 [libraries]
 # Kotlin test
@@ -73,6 +75,10 @@ flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql
 
 # Server — Japonais
 kuromoji-ipadic = { module = "com.atilika.kuromoji:kuromoji-ipadic", version.ref = "kuromoji" }
+
+# Shared
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
