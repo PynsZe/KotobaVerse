@@ -60,9 +60,11 @@ out/
 ### Kotlin ###
 .kotlin
 
+### KMP ###
+local.properties
+
 coverage/
 *.tmp
 .DS_Store
-build/
 .env*
-!.env.example
+!.env.examplelocal.properties
