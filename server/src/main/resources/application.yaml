@@ -11,8 +11,9 @@ ktor:
       - io.github.pynsze.RequestValidationKt.configureRequestValidation
       - io.github.pynsze.StatusPagesKt.configureStatusPages
       - io.github.pynsze.RoutingKt.configureRouting
+      - io.github.pynsze.auth.AuthKt.configureAuth
 
 postgres:
-  url: "$DB_URL:jdbc:postgresql://localhost:5432/kotobaverse"
-  user: "$DB_USER:kotobaverse"
-  password: "$DB_PASSWORD:kotobaverse"
+  url: "$DB_URL"
+  user: "$DB_USER"
+  password: "$DB_PASSWORD"

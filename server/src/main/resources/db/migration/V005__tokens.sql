@@ -1,9 +1,9 @@
 CREATE TABLE tokens (
     id                  BIGSERIAL    PRIMARY KEY,
-    line_id             BIGINT       NOT NULL REFERENCES lignes(id) ON DELETE CASCADE,
-    token_index         INTEGER      NOT NULL CHECK (position >= 0),
-    char_start          INTEGER      NOT NULL CHECK (char_debut >= 0),
-    char_end            INTEGER      NOT NULL CHECK (char_fin > char_debut),
+    line_id             BIGINT       NOT NULL REFERENCES lines(id) ON DELETE CASCADE,
+    token_index         INTEGER      NOT NULL CHECK (token_index >= 0),
+    char_start          INTEGER      NOT NULL CHECK (char_start >= 0),
+    char_end            INTEGER      NOT NULL CHECK (char_end > char_start),
     surface             TEXT         NOT NULL,
     reading             TEXT,        -- nullable: ponctuation, symboles
     lemma               TEXT,        -- nullable pareil
@@ -12,5 +12,5 @@ CREATE TABLE tokens (
     input_id            BIGINT,
     -- FK vers entrees(id) à ajouter dans la migration JMdict
     -- (ALTER TABLE tokens ADD CONSTRAINT tokens_entree_id_fkey ...)
-    UNIQUE (ligne_id, position)
+    UNIQUE (line_id, token_index)
 );

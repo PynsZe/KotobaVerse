@@ -7,9 +7,9 @@ import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.v1.jdbc.Database
 
 fun Application.configureDatabase() {
-    val url = readConfig("postgres.url", "DB_URL", "jdbc:postgresql://localhost:5432/kotobaverse")
-    val user = readConfig("postgres.user", "DB_USER", "kotobaverse")
-    val password = readConfig("postgres.password", "DB_PASSWORD", "kotobaverse")
+    val url = readConfig("postgres.url", "DB_URL")
+    val user = readConfig("postgres.user", "DB_USER")
+    val password = readConfig("postgres.password", "DB_PASSWORD")
 
     val dataSource = HikariDataSource(HikariConfig().apply {
         jdbcUrl = url
@@ -30,7 +30,7 @@ fun Application.configureDatabase() {
     Database.connect(datasource = dataSource)
 }
 
-private fun Application.readConfig(yamlKey: String, envVar: String, default: String): String =
+private fun Application.readConfig(yamlKey: String, envVar: String): String =
     environment.config.propertyOrNull(yamlKey)?.getString()
         ?: System.getenv(envVar)
-        ?: default
+        ?: error("Configuration manquante : définis la clé yaml '$yamlKey' ou la variable d'environnement '$envVar'")

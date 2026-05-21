@@ -8,4 +8,4 @@ CREATE TABLE origins (
     created_at          TIMESTAMPTZ  NOT NULL DEFAULT now()
 );
 
-CREATE INDEX provenances_type_idx ON provenances (type);
+CREATE INDEX origins_type_idx ON origins (type);

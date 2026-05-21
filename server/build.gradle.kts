@@ -58,6 +58,9 @@ dependencies {
     // Tokenisation japonaise (v1.0-alpha serveur, migrera côté client en v1.0-beta)
     implementation(libs.kuromoji.ipadic)
 
+    // Hasher
+    implementation(libs.bcrypt)
+
     // Shared
     implementation(projects.shared)
 

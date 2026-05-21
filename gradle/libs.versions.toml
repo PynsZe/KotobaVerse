@@ -24,6 +24,7 @@ material3 = "1.11.0-alpha07"
 postgresql = "42.7.11"
 kotlinx-serialization = "1.8.0"
 kotlinx-datetime = "0.6.2"
+bcrypt = "0.10.2"
 
 [libraries]
 # Kotlin test
@@ -79,6 +80,9 @@ kuromoji-ipadic = { module = "com.atilika.kuromoji:kuromoji-ipadic", version.ref
 # Shared
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+# Hasher
+bcrypt = { module = "at.favre.lib:bcrypt", version.ref = "bcrypt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
