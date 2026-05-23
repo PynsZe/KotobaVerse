@@ -63,6 +63,9 @@ dependencies {
 
     // Shared
     implementation(projects.shared)
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.4.0")
+    implementation("io.ktor:ktor-server-content-negotiation:3.4.0")
+    implementation("io.ktor:ktor-server-sessions:3.4.0")
 
     // Tests
     testImplementation(libs.ktor.server.test.host)

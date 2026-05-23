@@ -17,3 +17,11 @@ postgres:
   url: "$DB_URL"
   user: "$DB_USER"
   password: "$DB_PASSWORD"
+
+auth:
+  session:
+    encryptionKey: "$AUTH_SESSION_ENCRYPTION_KEY"
+    signingKey: "$AUTH_SESSION_SIGNING_KEY"
+    cookieSecure: false # Set to true in production when using HTTPS
+    maxAgeSeconds: 3600
+

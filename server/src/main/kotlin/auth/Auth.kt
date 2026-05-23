@@ -1,9 +1,14 @@
 package io.github.pynsze.auth
 
+import io.github.pynsze.auth.model.SessionPrincipal
+import io.github.pynsze.auth.persistance.UserRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
+import io.ktor.util.*
 
 /**
  * Installe le module d'authentification.
@@ -16,11 +21,50 @@ import io.ktor.server.routing.*
  *  - Étape 8 : GET /auth/me
  */
 fun Application.configureAuth() {
+    val config = environment.config
+    val encryptionKey = hex(config.property("auth.session.encryptionKey").getString())
+    val signingKey = hex(config.property("auth.session.signingKey").getString())
+    val cookieSecure = config.property("auth.session.cookieSecure").getString().toBoolean()
+    val maxAgeSeconds = config.property("auth.session.maxAgeSeconds").getString().toLong()
+
+    val userRepository = UserRepository()
+
+
+    install(Sessions) {
+        cookie<SessionPrincipal>("kotoba_session") {
+            cookie.path = "/"
+            cookie.httpOnly = true
+            cookie.secure = cookieSecure
+            cookie.extensions["SameSite"] = "Lax"
+            cookie.maxAgeInSeconds = maxAgeSeconds
+
+            transform(SessionTransportTransformerEncrypt(encryptionKey, signingKey))
+        }
+    }
+
+    install(Authentication) {
+        session<SessionPrincipal>("session-auth") {
+            validate { session ->
+                val user = userRepository.findById(session.userId)
+                if (user != null && user.isActive) session else null
+            }
+            challenge {
+                call.respond(HttpStatusCode.Unauthorized)
+            }
+        }
+    }
+
     routing {
         route("/auth") {
-            // Endpoint de vérification de câblage. À supprimer en fin d'étape 8.
             get("/_ping") {
                 call.respond(HttpStatusCode.OK, mapOf("module" to "auth", "status" to "wired"))
+            }
+        }
+
+        authenticate("session-auth") {
+            get("/auth/_authed_ping") {
+                val session = call.principal<SessionPrincipal>()
+                call.respond(HttpStatusCode.OK, mapOf("userId" to session!!.userId.toString()))
             }
         }
     }
