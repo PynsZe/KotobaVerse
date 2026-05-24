@@ -2,8 +2,10 @@ package io.github.pynsze.auth
 
 import io.github.pynsze.auth.model.SessionPrincipal
 import io.github.pynsze.auth.persistance.UserRepository
+import io.github.pynsze.auth.routes.accountRoutes
 import io.github.pynsze.auth.routes.registrationRoutes
 import io.github.pynsze.auth.routes.sessionRoutes
+import io.github.pynsze.auth.service.AccountService
 import io.github.pynsze.auth.service.BCryptPasswordHasher
 import io.github.pynsze.auth.service.LoginService
 import io.github.pynsze.auth.service.RegistrationService
@@ -42,6 +44,9 @@ fun Application.configureAuth() {
         userRepository = userRepository,
         passwordHasher = passwordHasher
     )
+    val accountService = AccountService(
+        userRepository = userRepository
+    )
 
     install(Sessions) {
         cookie<SessionPrincipal>("kotoba_session") {
@@ -76,12 +81,14 @@ fun Application.configureAuth() {
             registrationRoutes(registrationService)
 
             sessionRoutes(loginService)
-        }
 
-        authenticate("session-auth") {
-            get("/auth/_authed_ping") {
-                val session = call.principal<SessionPrincipal>()
-                call.respond(HttpStatusCode.OK, mapOf("userId" to session!!.userId.toString()))
+            authenticate("session-auth") {
+                get("/_authed_ping") {
+                    val session = call.principal<SessionPrincipal>()
+                    call.respond(HttpStatusCode.OK, mapOf("userId" to session!!.userId.toString()))
+                }
+
+                accountRoutes(accountService)
             }
         }
     }

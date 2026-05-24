@@ -23,7 +23,7 @@ fun Route.sessionRoutes(loginService: LoginService) {
             }
 
             is LoginResult.AccountDisabled -> call.respond(
-                HttpStatusCode.Unauthorized,
+                HttpStatusCode.Forbidden,
                 ApiError(
                     code = "account_disabled",
                     message = "Your account has been disabled, if you think this is an error, please contact the support"

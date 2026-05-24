@@ -1,9 +1,9 @@
 package io.github.pynsze.auth.persistance
 
 import io.github.pynsze.auth.model.User
-import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.v1.core.ResultRow
 import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.jdbc.deleteWhere
 import org.jetbrains.exposed.v1.jdbc.insert
 import org.jetbrains.exposed.v1.jdbc.selectAll
 import org.jetbrains.exposed.v1.jdbc.transactions.suspendTransaction
@@ -54,10 +54,10 @@ class UserRepository {
 
     suspend fun insertLocal(input: NewLocalUser): User = dbQuery {
         val insertedId = UsersTable.insert {
-            it[email]        = input.email.lowercase()
-            it[username]     = input.username
+            it[email] = input.email.lowercase()
+            it[username] = input.username
             it[passwordHash] = input.passwordHash
-            it[displayName]  = input.displayName
+            it[displayName] = input.displayName
             // oauthProvider / oauthSubject restent NULL → compte local
         } get UsersTable.id
 
@@ -73,21 +73,25 @@ class UserRepository {
         } > 0
     }
 
+    suspend fun deleteById(id: Long): Boolean = dbQuery {
+        UsersTable.deleteWhere(limit = 1) { UsersTable.id eq id } > 0
+    }
+
     private suspend fun <T> dbQuery(block: suspend () -> T): T =
         suspendTransaction { block() }
 
     private fun ResultRow.toUser(): User = User(
-        id            = this[UsersTable.id],
-        email         = this[UsersTable.email],
-        username      = this[UsersTable.username],
-        displayName   = this[UsersTable.displayName],
-        passwordHash  = this[UsersTable.passwordHash],
+        id = this[UsersTable.id],
+        email = this[UsersTable.email],
+        username = this[UsersTable.username],
+        displayName = this[UsersTable.displayName],
+        passwordHash = this[UsersTable.passwordHash],
         oauthProvider = this[UsersTable.oauthProvider],
-        oauthSubject  = this[UsersTable.oauthSubject],
-        avatarUrl     = this[UsersTable.avatarUrl],
-        isAdmin       = this[UsersTable.isAdmin],
-        isActive      = this[UsersTable.isActive],
-        createdAt     = this[UsersTable.createdAt].toInstant().toKotlinInstant(),
-        updatedAt     = this[UsersTable.updatedAt].toInstant().toKotlinInstant(),
+        oauthSubject = this[UsersTable.oauthSubject],
+        avatarUrl = this[UsersTable.avatarUrl],
+        isAdmin = this[UsersTable.isAdmin],
+        isActive = this[UsersTable.isActive],
+        createdAt = this[UsersTable.createdAt].toInstant().toKotlinInstant(),
+        updatedAt = this[UsersTable.updatedAt].toInstant().toKotlinInstant(),
     )
 }

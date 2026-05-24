@@ -17,7 +17,7 @@ data class User(
     val createdAt: Instant,
     val updatedAt: Instant,
 ) {
-    fun toMeResponse(): MeResponse {
+    internal fun toMeResponse(): MeResponse {
         return MeResponse(id, email, username, displayName, isAdmin)
     }
 }
