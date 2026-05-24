@@ -3,7 +3,9 @@ package io.github.pynsze.auth
 import io.github.pynsze.auth.model.SessionPrincipal
 import io.github.pynsze.auth.persistance.UserRepository
 import io.github.pynsze.auth.routes.registrationRoutes
+import io.github.pynsze.auth.routes.sessionRoutes
 import io.github.pynsze.auth.service.BCryptPasswordHasher
+import io.github.pynsze.auth.service.LoginService
 import io.github.pynsze.auth.service.RegistrationService
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -33,6 +35,10 @@ fun Application.configureAuth() {
     val userRepository = UserRepository()
     val passwordHasher = BCryptPasswordHasher()
     val registrationService = RegistrationService(
+        userRepository = userRepository,
+        passwordHasher = passwordHasher
+    )
+    val loginService = LoginService(
         userRepository = userRepository,
         passwordHasher = passwordHasher
     )
@@ -68,6 +74,8 @@ fun Application.configureAuth() {
             }
 
             registrationRoutes(registrationService)
+
+            sessionRoutes(loginService)
         }
 
         authenticate("session-auth") {

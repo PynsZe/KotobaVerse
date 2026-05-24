@@ -21,7 +21,7 @@ data class MeResponse(
 
 @Serializable
 data class LoginRequest(
-    val email: String,
+    val identifier: String,
     val password: String
 )
 
