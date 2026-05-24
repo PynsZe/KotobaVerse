@@ -1,5 +1,6 @@
 package io.github.pynsze.auth.model
 
+import com.kotobaverse.shared.api.dto.MeResponse
 import kotlin.time.Instant
 
 data class User(
@@ -15,4 +16,8 @@ data class User(
     val isActive: Boolean,
     val createdAt: Instant,
     val updatedAt: Instant,
-)
+) {
+    fun toMeResponse(): MeResponse {
+        return MeResponse(id, email, username, displayName, isAdmin)
+    }
+}

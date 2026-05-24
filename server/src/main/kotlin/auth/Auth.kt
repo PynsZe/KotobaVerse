@@ -2,6 +2,9 @@ package io.github.pynsze.auth
 
 import io.github.pynsze.auth.model.SessionPrincipal
 import io.github.pynsze.auth.persistance.UserRepository
+import io.github.pynsze.auth.routes.registrationRoutes
+import io.github.pynsze.auth.service.BCryptPasswordHasher
+import io.github.pynsze.auth.service.RegistrationService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -28,7 +31,11 @@ fun Application.configureAuth() {
     val maxAgeSeconds = config.property("auth.session.maxAgeSeconds").getString().toLong()
 
     val userRepository = UserRepository()
-
+    val passwordHasher = BCryptPasswordHasher()
+    val registrationService = RegistrationService(
+        userRepository = userRepository,
+        passwordHasher = passwordHasher
+    )
 
     install(Sessions) {
         cookie<SessionPrincipal>("kotoba_session") {
@@ -59,6 +66,8 @@ fun Application.configureAuth() {
             get("/_ping") {
                 call.respond(HttpStatusCode.OK, mapOf("module" to "auth", "status" to "wired"))
             }
+
+            registrationRoutes(registrationService)
         }
 
         authenticate("session-auth") {

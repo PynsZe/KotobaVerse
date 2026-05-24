@@ -8,53 +8,53 @@ sealed interface ValidationError {
 // --- Email ---
 data object EmailEmpty : ValidationError {
     override val code = "email.empty"
-    override val message = "L'email est requis."
+    override val message = "Email is required"
 }
 
 data object EmailTooLong : ValidationError {
     override val code = "email.too_long"
-    override val message = "L'email ne peut pas dépasser 254 caractères."
+    override val message = "Email can exceed 254 characters"
 }
 
 data object EmailMalformed : ValidationError {
     override val code = "email.malformed"
-    override val message = "Format d'email invalide."
+    override val message = "Email format is invalid"
 }
 
 // --- Username ---
 data object UsernameEmpty : ValidationError {
     override val code = "username.empty"
-    override val message = "Le nom d'utilisateur est requis."
+    override val message = "Username is required"
 }
 
 data object UsernameTooShort : ValidationError {
     override val code = "username.too_short"
-    override val message = "Le nom d'utilisateur doit faire au moins 3 caractères."
+    override val message = "Username must contain at least 3 characters"
 }
 
 data object UsernameTooLong : ValidationError {
     override val code = "username.too_long"
-    override val message = "Le nom d'utilisateur ne peut pas dépasser 30 caractères."
+    override val message = "Username must contain a maximum of 30 characters"
 }
 
 data object UsernameInvalidChars : ValidationError {
     override val code = "username.invalid_chars"
     override val message =
-        "Le nom d'utilisateur doit commencer par une lettre et ne contenir que lettres, chiffres, underscores ou tirets."
+        "Username needs to start with a letter and can only contain letters, numbers, dashes and underscores"
 }
 
 // --- Password ---
 data object PasswordEmpty : ValidationError {
     override val code = "password.empty"
-    override val message = "Le mot de passe est requis."
+    override val message = "Password is required"
 }
 
 data object PasswordTooShort : ValidationError {
     override val code = "password.too_short"
-    override val message = "Le mot de passe doit faire au moins 8 caractères."
+    override val message = "Password needs to be at least 8 characters"
 }
 
 data object PasswordTooLong : ValidationError {
     override val code = "password.too_long"
-    override val message = "Le mot de passe ne peut pas dépasser 72 caractères."
+    override val message = "Password can not exceed 72 characters"
 }

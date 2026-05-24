@@ -10,7 +10,7 @@ data class RegistrationValidation(
 }
 
 object RegistrationValidator {
-    fun validate(email: String, username: String, password: String) = RegistrationValidation (
+    fun validate(email: String, username: String, password: String) = RegistrationValidation(
         email = EmailValidator.validate(email),
         username = UsernameValidator.validate(username),
         password = PasswordValidator.validate(password)
