@@ -57,6 +57,7 @@ dependencies {
 
     // Tokenisation japonaise (v1.0-alpha serveur, migrera côté client en v1.0-beta)
     implementation(libs.kuromoji.ipadic)
+    implementation("com.github.cstoku:elasticsearch-analysis-kuromoji-unidic-neologd:2.3.2.0")
 
     // Hasher
     implementation(libs.bcrypt)

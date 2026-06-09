@@ -74,21 +74,14 @@ fun Application.configureAuth() {
 
     routing {
         route("/auth") {
-            get("/_ping") {
-                call.respond(HttpStatusCode.OK, mapOf("module" to "auth", "status" to "wired"))
-            }
 
             registrationRoutes(registrationService)
-
             sessionRoutes(loginService)
 
             authenticate("session-auth") {
-                get("/_authed_ping") {
-                    val session = call.principal<SessionPrincipal>()
-                    call.respond(HttpStatusCode.OK, mapOf("userId" to session!!.userId.toString()))
-                }
 
                 accountRoutes(accountService)
+            
             }
         }
     }

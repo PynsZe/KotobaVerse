@@ -1,5 +1,6 @@
 package io.github.pynsze.auth.service
 
+import io.github.pynsze.auth.logging.AuthEventLogger
 import io.github.pynsze.auth.model.User
 import io.github.pynsze.auth.persistance.UserRepository
 
@@ -50,6 +51,7 @@ class LoginService(
         if (!user.isActive)
             return LoginResult.AccountDisabled
 
+        AuthEventLogger.loginSuccess(user.id, trimmed)
         return LoginResult.Success(user)
     }
 }
