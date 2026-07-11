@@ -25,6 +25,7 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven("https://maven.codelibs.org/")
     }
     versionCatalogs {
         create("ktorLibs").from("io.ktor:ktor-version-catalog:3.4.0")

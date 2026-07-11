@@ -26,6 +26,10 @@ kotlinx-serialization = "1.11.0"
 kotlinx-datetime = "0.6.2"
 bcrypt = "0.10.2"
 
+luceneNeologd = "7.6.0-20190418"  # = Lucene 7.6.0 + snapshot NEologd 2019-03-25
+lucene        = "7.6.0"            # DOIT matcher la version Lucene de l'artefact codelibs
+
+
 [libraries]
 # Kotlin test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -75,7 +79,8 @@ flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway" }
 flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway" }
 
 # Server — Japonais
-kuromoji-ipadic = { module = "com.atilika.kuromoji:kuromoji-ipadic", version.ref = "kuromoji" }
+lucene-kuromoji-neologd = { module = "org.codelibs:lucene-analyzers-kuromoji-ipadic-neologd", version.ref = "luceneNeologd" }
+lucene-core             = { module = "org.apache.lucene:lucene-core", version.ref = "lucene" }
 
 # Shared
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }

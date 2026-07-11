@@ -56,7 +56,7 @@ dependencies {
     implementation(libs.flyway.database.postgresql)
 
     // Tokenisation japonaise (v1.0-alpha serveur, migrera côté client en v1.0-beta)
-    implementation(libs.kuromoji.ipadic)
+    implementation(libs.lucene.kuromoji.neologd) //lucene-kuromoji-neologd
 
     // Hasher
     implementation(libs.bcrypt)
