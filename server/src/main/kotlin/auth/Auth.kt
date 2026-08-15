@@ -9,24 +9,22 @@ import io.github.pynsze.auth.service.AccountService
 import io.github.pynsze.auth.service.BCryptPasswordHasher
 import io.github.pynsze.auth.service.LoginService
 import io.github.pynsze.auth.service.RegistrationService
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import io.ktor.server.sessions.*
-import io.ktor.util.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.principal
+import io.ktor.server.auth.session
+import io.ktor.server.response.respond
+import io.ktor.server.routing.get
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
+import io.ktor.server.sessions.SessionTransportTransformerEncrypt
+import io.ktor.server.sessions.Sessions
+import io.ktor.server.sessions.cookie
+import io.ktor.util.hex
 
-/**
- * Installe le module d'authentification.
- * Appelé depuis Application.kt après les plugins globaux (ContentNegotiation, CORS, etc.).
- *
- * Étapes ultérieures viendront enrichir ce module :
- *  - Étape 5 : install(Sessions) + install(Authentication)
- *  - Étape 6 : POST /auth/register
- *  - Étape 7 : POST /auth/login + POST /auth/logout
- *  - Étape 8 : GET /auth/me
- */
 fun Application.configureAuth() {
     val config = environment.config
     val encryptionKey = hex(config.property("auth.session.encryptionKey").getString())
