@@ -23,6 +23,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":tokenizer"))
     // Ktor — server
     implementation(ktorLibs.server.core)
     implementation(ktorLibs.server.netty)

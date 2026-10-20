@@ -5,28 +5,28 @@ android-minSdk = "24"
 android-targetSdk = "36"
 androidx-activity = "1.13.0"
 androidx-appcompat = "1.7.1"
-androidx-core = "1.18.0"
+androidx-core = "1.19.1"
 androidx-espresso = "3.7.0"
-androidx-lifecycle = "2.11.0-beta01"
+androidx-lifecycle = "2.11.0"
 androidx-test-ext = "1.3.0"
-compose-multiplatform = "1.11.0"
-exposed = "1.2.0"
-flyway = "12.6.1"
-hikaricp = "7.0.2"
+compose-multiplatform = "1.12.2"
+exposed = "1.6.0"
+flyway = "13.10.3"
+hikaricp = "7.1.0"
 junit = "4.13.2"
-junit-jupiter = "5.11.4"
-kotlin = "2.3.21"
+junit-jupiter = "6.1.3"
+kotlin = "2.4.21"
 kotlinx-coroutines = "1.11.0"
-ktor-test = "3.4.3"
-logback = "1.5.21"
+ktor-test = "3.6.0"
+logback = "1.6.5"
 material3 = "1.11.0-alpha07"
-postgresql = "42.7.11"
-kotlinx-serialization = "1.11.0"
-kotlinx-datetime = "0.6.2"
+postgresql = "42.7.14"
+kotlinx-serialization = "1.12.0"
+kotlinx-datetime = "0.8.0"
 bcrypt = "0.10.2"
 luceneNeologd = "7.6.0-20190418"  # = Lucene 7.6.0 + snapshot NEologd 2019-03-25
-lucene        = "7.6.0"            # DOIT matcher la version Lucene de l'artefact codelibs
-ktor = "3.0.0"
+lucene = "7.6.0"            # DOIT matcher la version Lucene de l'artefact codelibs
+ktor = "3.6.0"
 
 [libraries]
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
@@ -80,7 +80,7 @@ flyway-database-postgresql = { module = "org.flywaydb:flyway-database-postgresql
 
 # Server — Japonais
 lucene-kuromoji-neologd = { module = "org.codelibs:lucene-analyzers-kuromoji-ipadic-neologd", version.ref = "luceneNeologd" }
-lucene-core             = { module = "org.apache.lucene:lucene-core", version.ref = "lucene" }
+lucene-core = { module = "org.apache.lucene:lucene-core", version.ref = "lucene" }
 
 # Shared
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }

@@ -13,6 +13,8 @@ kotlin {
 }
 
 dependencies {
+    implementation(project(":tokenizer"))
+    
     implementation(projects.client.composeShared)
 
     implementation(libs.androidx.activity.compose)

@@ -28,11 +28,13 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
+            implementation(project(":tokenizer"))
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.compose.runtime)
             implementation(projects.shared)
         }
         commonMain.dependencies {
+            implementation(project(":shared"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -41,6 +43,9 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
+        }
+        jvmMain.dependencies {
+            implementation(project(":tokenizer"))
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

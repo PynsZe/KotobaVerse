@@ -7,6 +7,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":tokenizer"))
+    
     implementation(projects.client.composeShared)
 
     implementation(compose.desktop.currentOs)
