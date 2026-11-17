@@ -25,6 +25,9 @@ dependencies {
     implementation(libs.ktor.client.logging)
 
     debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.koin.android)
+
 }
 
 android {

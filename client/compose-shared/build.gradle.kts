@@ -32,6 +32,7 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.compose.runtime)
             implementation(projects.shared)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(project(":shared"))
@@ -43,6 +44,9 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
         }
         jvmMain.dependencies {
             implementation(project(":tokenizer"))
