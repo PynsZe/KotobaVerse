@@ -10,7 +10,7 @@ val coreModule = module {
 }
 
 // ajouter els modules ici
-val appModules: List<Module> = listOf(coreModule)
+val appModules: List<Module> = listOf(coreModule, platformModule())
 
 fun initKoin(config: KoinAppDeclaration? = null) = startKoin {
     config?.invoke(this)
