@@ -25,7 +25,7 @@ kotlinx-serialization = "1.13.0"
 kotlinx-datetime = "0.8.0"
 bcrypt = "0.10.2"
 luceneNeologd = "7.6.0-20190418"  # = Lucene 7.6.0 + snapshot NEologd 2019-03-25
-lucene = "10.6.0"            # DOIT matcher la version Lucene de l'artefact codelibs
+lucene = "7.6.0"            # DOIT matcher la version Lucene de l'artefact codelibs
 ktor = "3.6.1"
 
 [libraries]
