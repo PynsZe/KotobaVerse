@@ -10,7 +10,7 @@ import com.kotobaverse.client.core.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 
-class KotobaverseApplication : ComponentActivity() {
+open class KotobaverseApplication : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         initKoin {
